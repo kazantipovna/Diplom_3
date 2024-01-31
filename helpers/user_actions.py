@@ -6,6 +6,11 @@ from pages.lk_page import LkPage
 from pages.login_page import LoginPage
 from pages.main_page import MainPage
 
+from selenium.webdriver.remote.webelement import WebElement
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.common.by import By
+
 
 def login_and_go_to_lk(driver, user):
     """Логинится и заходит в ЛК"""
@@ -61,6 +66,9 @@ def create_burger_and_get_order_id(driver, user):
     """Создает бургер и получает id заказа залогиненного пользователя"""
     main_page = login_and_set_burger(driver, user)
     with allure.step('Получаем номер заказа'):
+        # locator = By.XPATH, '//div/h2[contains(@class,"Modal_modal__title_shadow")]'
+        # WebDriverWait(driver, 10).until(expected_conditions.text_to_be_present_in_element(locator, '8888'))
+        # main_page.wait_for_element_is_visible(main_page.order_number())
         sleep(2) # пришлось оставить самый элементарный слип, иначе в мозиле все наглухо зависает
         order_number = str(main_page.get_order_number_text())
         return order_number

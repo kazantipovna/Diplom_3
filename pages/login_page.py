@@ -8,8 +8,8 @@ class LoginPageLocators:
     """Класс локаторов"""
     recover_pass = By.XPATH, './/a[text()="Восстановить пароль"]'
     login_btn = By.XPATH, './/button[text()="Войти"]'
-    email_fieldset = By.XPATH, './/fieldset[1]//input'
-    pass_fieldset = By.XPATH, './/fieldset[2]//input'
+    email_fieldset = By.XPATH, './/input[@name="name"]'
+    pass_fieldset = By.XPATH, './/input[@name="Пароль"]'
     header_h2 = By.XPATH, './/h2'
 
 
