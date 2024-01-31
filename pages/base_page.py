@@ -15,26 +15,22 @@ class BasePage:
         self.driver = driver
         self.url = urls.main_url
 
-    # @allure.step('Открываем страничку {url}')
+    @allure.step('Открываем страничку {url}')
     def open(self, url):
-        """Открываем выбранную страничку"""
         self.driver.get(url)
 
-    # @allure.step('Получаем элемент {locator}')
+    @allure.step('Получаем элемент {locator}')
     def get_web_element(self, locator):
-        """Получаем необходимый веб элемент"""
         element = self.wait_for_element_is_visible(locator)
         self.scroll_to_web_element(element)
         return self.driver.find_element(*locator)
 
-    # @allure.step('Ждем элемент {locator}')
+    @allure.step('Ждем элемент {locator}')
     def wait_for_element_is_visible(self, locator):
-        """Ждун элемента"""
         return WebDriverWait(self.driver, 10).until(expected_conditions.visibility_of_element_located(locator))
 
-    # @allure.step('Скроллим до элемента {web_element}')
+    @allure.step('Скроллим до элемента {web_element}')
     def scroll_to_web_element(self, web_element):
-        """Скроллим до элемента"""
         self.driver.execute_script('arguments[0].scrollIntoView();', web_element)
 
     @staticmethod
