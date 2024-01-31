@@ -91,6 +91,11 @@ class MainPage(BasePage):
         target = self.get_web_element(self.locators.burger_constructor_basket)
         action_chains.drag_and_drop(element, target).perform()
 
+    @allure.step('Добавляем необходимое количество ингредиентов')
+    def add_some_ingredients(self, driver, count_ingr):
+        for ingr in range(count_ingr):
+            self.add_ingredient(driver)
+
     @allure.step('Добавляем булку в бургер')
     def add_bun(self, driver):
         """Добавляет булку в бургер"""

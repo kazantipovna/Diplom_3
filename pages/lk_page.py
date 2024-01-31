@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 
 from pages.base_page import BasePage
@@ -19,6 +20,7 @@ class LkPage(BasePage):
         self.url = urls.lk_profile_url
         self.locators = LkPageLocators()
 
+    # @allure.step('Составляем payload из переданного количества ингредиентов:')
     @property
     def lk_profile(self):
         return self.get_web_element(self.locators.lk_profile)

@@ -43,8 +43,7 @@ class TestMainFunctional:
     @allure.description('при добавлении ингредиента в заказ счётчик этого ингредиента увеличивается')
     def test_ingredients_count(self, driver, count_ingr=2):
         main_page = actions.get_main_page(driver)
-        for ingr in range(count_ingr):
-            main_page.add_ingredient(driver)
+        main_page.add_some_ingredients(driver, count_ingr)
         result = main_page.ingr_count.text
         assert result == str(count_ingr), f'Ошибка: не отработал счетчик ингредиента, {result} вместо {count_ingr}'
 

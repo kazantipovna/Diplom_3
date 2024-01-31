@@ -242,3 +242,5 @@ cython_debug/
 allure-results
 chromedriver
 geckodriver
+main.py
+other_locators.py
