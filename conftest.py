@@ -20,7 +20,7 @@ def driver(request):
 
 
 @pytest.fixture
-def user(driver):
+def user():
     """Фикстура пользователя, создает и удаляет пользака для теста"""
     user = new_user.register_new_user()
     yield user
