@@ -1,4 +1,5 @@
 import allure
+from selenium.webdriver.common.by import By
 
 from pages.login_page import LoginPage
 from pages.recover_page import RecoverPage, RecoverPageLocators
@@ -41,6 +42,5 @@ class TestRecovers:
         recover_page.recover_set_email(user)
         recover_page.click_web_element(recover_page.recover_pass_btn)
         recover_page.click_web_element(recover_page.eye_btn)
-        assert ('input__placeholder-focused' in
-                driver.find_element(*RecoverPageLocators.recover_pass_set).get_attribute("class")), \
-            f'Ошибка: не подсветилось поле "Пароль" после нажатия на глз'
+        assert 'input__placeholder-focused' in recover_page.get_class_name(RecoverPageLocators.recover_pass_set), \
+            f'Ошибка: не подсветилось поле "Пароль" после нажатия на глаз'

@@ -7,7 +7,6 @@ import urls
 
 
 class MainPageLocators:
-    """Класс локаторов"""
     order_btn = By.XPATH, './/button[text()="Оформить заказ"]'
     lk_btn = By.XPATH, './/p[text()="Личный Кабинет"]'
     constructor = By.XPATH, './/p[text()="Конструктор"]'
@@ -21,10 +20,10 @@ class MainPageLocators:
     burger_constructor_basket = By.XPATH, './/ul[contains(@class,"BurgerConstructor_basket")]'
     order_msg_panel = By.XPATH, '//div[contains(@class,"Modal_modal__contentBox__sCy8X")]'
     order_number = By.XPATH, '//div/h2[contains(@class,"Modal_modal__title_shadow")]'
+    default_order_number = By.XPATH, '//div/h2[text()="9999"]'
 
 
 class MainPage(BasePage):
-    """Класс основной страницы"""
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -98,7 +97,6 @@ class MainPage(BasePage):
 
     @allure.step('Добавляем булку в бургер')
     def add_bun(self, driver):
-        """Добавляет булку в бургер"""
         action_chains = ActionChains(driver)
         element = self.get_web_element(self.locators.bun)
         target = self.get_web_element(self.locators.burger_constructor_basket)
@@ -106,6 +104,5 @@ class MainPage(BasePage):
 
     @allure.step('Получаем номер заказа')
     def get_order_number_text(self):
-        """Возвращает номер заказа"""
         text = self.order_number.text
         return text

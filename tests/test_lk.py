@@ -1,6 +1,8 @@
 import allure
 
 import helpers.user_actions as actions
+from helpers import user_actions
+from pages.history_page import HistoryPage
 from pages.login_page import LoginPage
 import urls
 
@@ -19,7 +21,9 @@ class TestLK:
     def test_go_to_orders_history(self, driver, user):
         lk = actions.login_and_go_to_lk(driver, user)
         lk.click_web_element(lk.lk_history)
-        assert driver.current_url == urls.lk_history_url, f'Ошибка: не осуществлен переход в п/м «История заказов»'
+        history = HistoryPage(driver)
+        curr_url = history.get_curr_url()
+        assert curr_url == urls.lk_history_url, f'Ошибка: не осуществлен переход в п/м «История заказов»'
 
     @allure.title('Выход из аккаунта')
     @allure.description('выход из аккаунта')

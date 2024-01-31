@@ -5,7 +5,6 @@ import urls
 
 
 class LoginPageLocators:
-    """Класс локаторов"""
     recover_pass = By.XPATH, './/a[text()="Восстановить пароль"]'
     login_btn = By.XPATH, './/button[text()="Войти"]'
     email_fieldset = By.XPATH, './/input[@name="name"]'
@@ -14,7 +13,6 @@ class LoginPageLocators:
 
 
 class LoginPage(BasePage):
-    """Класс страницы логина"""
 
     def __init__(self, driver):
         super().__init__(driver)

@@ -9,11 +9,15 @@ import urls
 
 
 class BasePage:
-    """Класс базовой наследуемой страницы"""
 
     def __init__(self, driver):
         self.driver = driver
         self.url = urls.main_url
+
+    @allure.step('Получаем ссылку странички')
+    def get_curr_url(self):
+        curr_url = self.driver.current_url
+        return curr_url
 
     @allure.step('Открываем страничку {url}')
     def open(self, url):
@@ -28,6 +32,14 @@ class BasePage:
     @allure.step('Ждем элемент {locator}')
     def wait_for_element_is_visible(self, locator):
         return WebDriverWait(self.driver, 10).until(expected_conditions.visibility_of_element_located(locator))
+
+    @allure.step('Ждем скрытия {locator}')
+    def wait_for_element_invisibility(self, locator):
+        return WebDriverWait(self.driver, 10).until(expected_conditions.invisibility_of_element(locator))
+
+    @allure.step('Получаем название класса для проверки активности поля')
+    def get_class_name(self, locator):
+        return self.wait_for_element_is_visible(locator).get_attribute("class")
 
     @allure.step('Скроллим до элемента {web_element}')
     def scroll_to_web_element(self, web_element):

@@ -6,7 +6,6 @@ import urls
 
 
 class RibbonPageLocators:
-    """Класс локаторов"""
     orders_ribbon_header = By.XPATH, './/h1[text()="Лента заказов"]'
     last_order = By.XPATH, './/div[contains(@class,"OrderHistory_dataBox__1mkxK")]'
     order_panel = By.XPATH, './/div[contains(@class,"Modal_orderBox__1xWdi")]'
@@ -17,7 +16,6 @@ class RibbonPageLocators:
 
 
 class RibbonPage(BasePage):
-    """Класс основной страницы"""
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -54,28 +52,24 @@ class RibbonPage(BasePage):
 
     @allure.step('Получаем количество всех заказов')
     def get_all_orders_count(self):
-        """Получает все заказы в ленте"""
         self.open(urls.ribbon_url)
         all_orders = self.all_orders.text
         return all_orders
 
     @allure.step('Получаем количество сегодняшних заказов')
     def get_today_orders_count(self):
-        """Получает сегодняшние заказы в ленте"""
         self.open(urls.ribbon_url)
         today_orders = self.today_orders.text
         return today_orders
 
     @allure.step('Получаем заказы в работе')
     def get_orders_in_work(self):
-        """Получает заказы В работе в летне"""
         self.open(urls.ribbon_url)
         orders_in_work = self.orders_in_work.text
         return orders_in_work
 
     @allure.step('Получаем готовые заказы')
     def get_orders_done(self):
-        """Получает готовые заказы в ленте"""
         self.open(urls.ribbon_url)
         orders_done = self.orders_done.text
         return orders_done
