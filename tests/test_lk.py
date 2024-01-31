@@ -11,7 +11,8 @@ class TestLK:
     @allure.title('Переход в «Личный кабинет»')
     @allure.description('переход по клику на «Личный кабинет» с основной страницы')
     def test_go_to_lk(self, driver, user):
-        assert actions.login_and_go_to_lk(driver, user), f'Ошибка: не осуществлен переход в ЛК'
+        lk = actions.login_and_go_to_lk(driver, user)
+        assert lk.lk_profile.is_displayed(), f'Ошибка: не осуществлен переход в ЛК'
 
     @allure.title('Переход в «История заказов»')
     @allure.description('переход в раздел «История заказов» в личном кабинете')
