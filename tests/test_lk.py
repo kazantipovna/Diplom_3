@@ -1,9 +1,9 @@
 import allure
 
 import helpers.user_actions as actions
-from helpers import user_actions
 from pages.history_page import HistoryPage
-from pages.login_page import LoginPage
+from locators.lk_page_locators import LkPageLocators
+from locators.login_page_locators import LoginPageLocators
 import urls
 
 
@@ -14,13 +14,14 @@ class TestLK:
     @allure.description('переход по клику на «Личный кабинет» с основной страницы')
     def test_go_to_lk(self, driver, user):
         lk = actions.login_and_go_to_lk(driver, user)
-        assert lk.lk_profile.is_displayed(), f'Ошибка: не осуществлен переход в ЛК'
+        element_text = lk.get_element_text(LkPageLocators.lk_profile)
+        assert 'Профиль' in element_text, f'Ошибка: не осуществлен переход в ЛК'
 
     @allure.title('Переход в «История заказов»')
     @allure.description('переход в раздел «История заказов» в личном кабинете')
     def test_go_to_orders_history(self, driver, user):
         lk = actions.login_and_go_to_lk(driver, user)
-        lk.click_web_element(lk.lk_history)
+        lk.click_element(LkPageLocators.lk_history)
         history = HistoryPage(driver)
         curr_url = history.get_curr_url()
         assert curr_url == urls.lk_history_url, f'Ошибка: не осуществлен переход в п/м «История заказов»'
@@ -29,6 +30,6 @@ class TestLK:
     @allure.description('выход из аккаунта')
     def test_logout(self, driver, user):
         lk = actions.login_and_go_to_lk(driver, user)
-        lk.click_web_element(lk.lk_exit)
-        login = LoginPage(driver)
-        assert login.login_btn.is_displayed(), f'Ошибка: не осуществлен выход из системы'
+        lk.lk_exit_click()
+        element_text = lk.get_element_text(LoginPageLocators.header_enter)
+        assert 'Вход' in element_text, f'Ошибка: не осуществлен выход из системы'

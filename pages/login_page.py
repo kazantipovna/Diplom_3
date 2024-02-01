@@ -1,15 +1,10 @@
-from selenium.webdriver.common.by import By
+from time import sleep
 
+import allure
+
+from locators.login_page_locators import LoginPageLocators
 from pages.base_page import BasePage
 import urls
-
-
-class LoginPageLocators:
-    recover_pass = By.XPATH, './/a[text()="Восстановить пароль"]'
-    login_btn = By.XPATH, './/button[text()="Войти"]'
-    email_fieldset = By.XPATH, './/input[@name="name"]'
-    pass_fieldset = By.XPATH, './/input[@name="Пароль"]'
-    header_h2 = By.XPATH, './/h2'
 
 
 class LoginPage(BasePage):
@@ -19,22 +14,20 @@ class LoginPage(BasePage):
         self.url = urls.login_url
         self.locators = LoginPageLocators()
 
-    @property
-    def recover_pass(self):
-        return self.get_web_element(self.locators.recover_pass)
+    @allure.step("Авторизоваться с логином")
+    def login_fields_set(self, user):
+        self.email_fieldset(user['email'])
+        self.pass_fieldset(user['password'])
+        self.login_btn_click()
 
-    @property
-    def login_btn(self):
-        return self.get_web_element(self.locators.login_btn)
+    @allure.step('Заполняем поле email')
+    def email_fieldset(self, email):
+        self.get_element_put_text(self.locators.email_fieldset, email)
 
-    @property
-    def email_fieldset(self):
-        return self.get_web_element(self.locators.email_fieldset)
+    @allure.step('Заполняем поле Пароль')
+    def pass_fieldset(self, password):
+        self.get_element_put_text(self.locators.pass_fieldset, password)
 
-    @property
-    def pass_fieldset(self):
-        return self.get_web_element(self.locators.pass_fieldset)
-
-    @property
-    def header_h2(self):
-        return self.get_web_element(self.locators.header_h2)
+    @allure.step('Кликаем кнопку входа')
+    def login_btn_click(self):
+        self.get_web_element(self.locators.login_btn).click()
