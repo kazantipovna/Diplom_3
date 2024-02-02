@@ -60,7 +60,7 @@ class MainPage(BasePage):
         self.add_ingredient(driver)
         self.click_order_btn()
         self.wait_def_num_invisibility()
-        order_number = str(self.get_element_text(self.locators.order_number))
+        order_number = self.get_order_number()
         self.click_cross_btn()
         return order_number
 
@@ -83,8 +83,3 @@ class MainPage(BasePage):
     def check_ingr_details_form(self):
         element_text = self.get_element_text(self.locators.ingr_text)
         assert 'Детали ингредиента' in element_text, f'Ошибка: нет формы "Детали ингредиента"'
-
-    @allure.step('Проверяем, что открылась форма заказа')
-    def check_order_msg_panel(self):
-        element_text = self.get_element_text(self.locators.order_msg_panel)
-        assert 'идентификатор заказа' in element_text, f'Ошибка: нет формы с деталями заказа после оформления'

@@ -57,6 +57,7 @@ class BasePage:
     def get_class_name(self, locator):
         return self.wait_for_element_is_visible(locator).get_attribute("class")
 
+    @allure.step('Добавляем составляющую в бургер')
     def run_action_chains(self, driver, element_locator, target_locator):
         action_chains = ActionChains(driver)
         element = self.get_web_element(element_locator)
