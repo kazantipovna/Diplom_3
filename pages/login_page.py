@@ -1,5 +1,3 @@
-from time import sleep
-
 import allure
 
 from locators.login_page_locators import LoginPageLocators
@@ -31,3 +29,12 @@ class LoginPage(BasePage):
     @allure.step('Кликаем кнопку входа')
     def login_btn_click(self):
         self.get_web_element(self.locators.login_btn).click()
+
+    @allure.step('Кликаем кнопку восстановления пароля')
+    def login_recover_click(self):
+        self.get_web_element(self.locators.recover_pass).click()
+
+    @allure.step('Проверяем, что страничка ЛК загрузилась')
+    def check_login_page(self):
+        element_text = self.get_element_text(self.locators.header_enter)
+        assert 'Вход' in element_text, f'Ошибка: не осуществлен выход из системы'

@@ -8,3 +8,4 @@ class RecoverPageLocators:
     save_btn = By.XPATH, './/button[text()="Сохранить"]'
     eye_btn = By.CLASS_NAME, 'input__icon'
     recover_pass_set = By.XPATH, './/label[text()="Пароль"]'
+    header_recover = By.XPATH, './/h2[text()="Восстановление пароля"]'

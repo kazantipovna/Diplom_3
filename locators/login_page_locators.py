@@ -7,4 +7,4 @@ class LoginPageLocators:
     email_fieldset = By.XPATH, './/input[@name="name"]'
     pass_fieldset = By.XPATH, './/input[@name="Пароль"]'
     header_enter = By.XPATH, './/h2[text()="Вход"]'
-    header_recover = By.XPATH, './/h2[text()="Восстановление пароля"]'
+    # header_recover = By.XPATH, './/h2[text()="Восстановление пароля"]'

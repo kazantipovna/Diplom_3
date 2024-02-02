@@ -1,4 +1,5 @@
 import allure
+from selenium.webdriver import ActionChains
 
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
@@ -50,8 +51,14 @@ class BasePage:
 
     @allure.step('Ждем скрытия элемента {locator}')
     def wait_for_element_invisibility(self, locator):
-        return WebDriverWait(self.driver, 10).until(expected_conditions.invisibility_of_element(locator))
+        return WebDriverWait(self.driver, 30).until(expected_conditions.invisibility_of_element(locator))
 
     @allure.step('Получаем название класса для проверки активности поля')
     def get_class_name(self, locator):
         return self.wait_for_element_is_visible(locator).get_attribute("class")
+
+    def run_action_chains(self, driver, element_locator, target_locator):
+        action_chains = ActionChains(driver)
+        element = self.get_web_element(element_locator)
+        target = self.get_web_element(target_locator)
+        action_chains.drag_and_drop(element, target).perform()

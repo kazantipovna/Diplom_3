@@ -16,6 +16,15 @@ class LkPage(BasePage):
     def lk_btn_click(self):
         self.click_element(self.locators.lk_btn)
 
+    @allure.step('Кликаем кнопку "История заказов"')
+    def lk_history_click(self):
+        self.click_element(self.locators.lk_history)
+
     @allure.step('Кликаем кнопку "Выход"')
     def lk_exit_click(self):
         self.click_element(self.locators.lk_exit)
+
+    @allure.step('Проверяем, что страничка ЛК загрузилась')
+    def check_profile_page(self):
+        element_text = self.get_element_text(self.locators.lk_profile)
+        assert 'Профиль' in element_text, f'Ошибка: не осуществлен переход в ЛК'

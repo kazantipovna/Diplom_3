@@ -1,7 +1,8 @@
 import pytest
 from selenium import webdriver
 
-import helpers.user_create as new_user
+import helpers as new_user
+from pages.login_page import LoginPage
 
 # путь до драйверов
 DRIVER_PATH_CHROME = './chromedriver'
@@ -25,3 +26,11 @@ def user():
     user = new_user.register_new_user()
     yield user
     new_user.delete_user(user)
+
+
+@pytest.fixture
+def login(driver, user):
+    login_page = LoginPage(driver)
+    login_page.open(login_page.url)
+    login_page.login_fields_set(user)
+    yield login_page

@@ -8,5 +8,5 @@ class RibbonPageLocators:
     all_orders = By.XPATH, './/div[2]/p[contains(@class,"OrderFeed_number__2MbrQ")]'
     today_orders = By.XPATH, './/div[3]/p[contains(@class,"OrderFeed_number__2MbrQ")]'
     orders_in_work = By.XPATH, './/ul[2]/li[contains(@class,"text text_type_digits-default")]'
-    orders_done = By.XPATH, './/div[1]/ul[1][contains(@class,"OrderFeed_orderList")]'
+    orders_done = By.XPATH, './/ul[1][contains(@class,"OrderFeed_orderList")]'
     order_compound = By.XPATH, './/div/p[3][text()="Cостав"]'

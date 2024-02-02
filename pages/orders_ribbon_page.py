@@ -12,9 +12,13 @@ class RibbonPage(BasePage):
         self.url = urls.ribbon_url
         self.locators = RibbonPageLocators()
 
+    @allure.step('Кликаем верхний заказ')
+    def click_last_order(self):
+        self.click_element(self.locators.last_order)
+
     @allure.step('Получаем количество всех заказов')
     def get_all_orders_count(self):
-        self.open(urls.ribbon_url)
+        # self.open(urls.ribbon_url)
         all_orders = int(self.get_element_text(self.locators.all_orders))
         return all_orders
 
@@ -36,3 +40,12 @@ class RibbonPage(BasePage):
         orders_done = str(self.get_element_text(self.locators.orders_done))
         return orders_done
 
+    @allure.step('Проверяем, что страничка ЛК загрузилась')
+    def check_orders_ribbon_page(self):
+        element_text = self.get_element_text(self.locators.orders_ribbon_header)
+        assert 'Лента заказов' in element_text, f'Ошибка: не осуществлен переход в «Лента заказов»'
+
+    @allure.step('Проверяем, что панель с составом заказа отобразилась')
+    def check_order_compound(self):
+        element_text = self.get_element_text(self.locators.order_compound)
+        assert 'Cостав' in element_text, f'Ошибка: не отобразилась панель ингредиента'
